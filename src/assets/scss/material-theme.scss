@@ -79,8 +79,8 @@ $custom-material-accent: (
 );
 
 
-$payment-widget-primary: mat-palette($mat-indigo);
-$payment-widget-accent: mat-palette($mat-pink, A200, A100, A400);
+$payment-widget-primary: mat-palette($custom-material-primary);
+$payment-widget-accent: mat-palette($custom-material-accentpink, A200, A100, A400);
 
 // The warn palette is optional (defaults to red).
 $payment-widget-warn: mat-palette($mat-red);

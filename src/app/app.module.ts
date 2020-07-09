@@ -1,4 +1,11 @@
 import {HttpClientModule} from '@angular/common/http';
+import {ReactiveFormsModule} from '@angular/forms';
+import {MatButtonModule} from '@angular/material/button';
+import {
+  MatCardModule
+} from '@angular/material/card';
+import {MatDatepickerModule} from '@angular/material/datepicker';
+import {MatSelectModule} from '@angular/material/select';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import {NgxMaskModule} from 'ngx-mask';
@@ -19,6 +26,11 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     HttpClientModule,
     BrowserAnimationsModule,
     NgxMaskModule.forRoot(),
+    MatCardModule,
+    MatButtonModule,
+    MatDatepickerModule,
+    MatSelectModule,
+    ReactiveFormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

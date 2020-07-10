@@ -9,14 +9,76 @@
 <div class="content" role="main">
 
   <mat-card>
-    <mat-card-title>
+    <mat-card-title class="text-primary text-uppercase">
       Checkout Invoice
     </mat-card-title>
 
-    <mat-card-content [formGroup]="paymentForm">
-      <form>
+    <mat-card-content>
+      <form id="paymentForm" [formGroup]="paymentForm">
+        <div class="row">
+          <mat-form-field class="col-sm-9 col-xs-8">
+            <mat-label>Amount</mat-label>
+            <input matInput formControlName="amount">
+          </mat-form-field>
+
+          <mat-form-field class="col-sm-3 col-xs-4">
+            <mat-label>Currency</mat-label>
+            <input matInput formControlName="currency">
+          </mat-form-field>
+        </div>
+        <div class="row">
+          <mat-form-field>
+            <mat-label>Country</mat-label>
+            <mat-select formControlName="country" name="Country">
+              <input class="input-select-search" matInput type="text" [formControl]="filterCountry"
+                     placeholder="Search..." autocomplete="off">
+              <mat-option *ngFor="let country of tempCountry" [value]="country.code">
+                {{country.name}}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+        <div class="row">
+          <label class="text-left text-primary">Payment Method:</label>
+          <mat-radio-group class="col-sm-12 radio-vertical" formControlName="paymentMethod">
+            <mat-radio-button class="mt-2 mb-2" *ngFor="let method of listPaymentMethods" [value]="method.id">
+              <img [src]="method.img_url" alt="{{method.name}}">
+              <div style="clear:both;"></div>
+              <span>{{method.name}}</span>
+            </mat-radio-button>
+          </mat-radio-group>
+        </div>
+        <ng-container formGroupName="cardForm">
+          <div class="row">
+            <mat-form-field class="col-sm-12">
+              <mat-label>Name on card</mat-label>
+              <input matInput formControlName="cardName">
+            </mat-form-field>
+
+            <mat-form-field class="col-sm-12">
+              <mat-label>Card Number</mat-label>
+              <input matInput formControlName="cardNumber">
+            </mat-form-field>
+
+            <mat-form-field class="col-sm-6">
+              <mat-label>Expire Date</mat-label>
+              <input matInput formControlName="expire">
+            </mat-form-field>
+
+            <mat-form-field class="col-sm-6">
+              <mat-label>CVV</mat-label>
+              <input matInput formControlName="cvv">
+            </mat-form-field>
+          </div>
+        </ng-container>
       </form>
     </mat-card-content>
+
+    <mat-card-actions>
+      <button mat-raised-button color="primary" (click)="onSubmit()">
+        <i class="material-icons mr-2">payment</i> Pay {{paymentForm.get('amount').value}} {{paymentForm.get('currency').value}}
+      </button>
+    </mat-card-actions>
   </mat-card>
 
 </div>

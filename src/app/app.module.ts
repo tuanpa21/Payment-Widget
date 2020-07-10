@@ -9,6 +9,7 @@ import {MatSelectModule} from '@angular/material/select';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import {NgxMaskModule} from 'ngx-mask';
+import {FormsUtilModule} from 'src/forms/forms.module';
 import {PaymentFormComponent} from 'src/pages/payment-form/payment-form.component';
 import {PaymentResultComponent} from 'src/pages/payment-result/payment-result.component';
 
@@ -27,10 +28,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     BrowserAnimationsModule,
     NgxMaskModule.forRoot(),
     MatCardModule,
-    MatButtonModule,
-    MatDatepickerModule,
-    MatSelectModule,
-    ReactiveFormsModule
+    FormsUtilModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

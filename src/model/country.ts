@@ -4,6 +4,6 @@ export interface ICountry {
 }
 
 export interface IDetectCountry {
+  code: string;
   country: string;
-  countryCode: string;
 }

@@ -1,0 +1,94 @@
+// Custom Theming for Angular Material
+// For more information: https://material.angular.io/guide/theming
+@import '~@angular/material/theming';
+// Plus imports for other components in your app.
+
+// Include the common styles for Angular Material. We include this here so that you only
+// have to load a single css file for Angular Material in your app.
+// Be sure that you only ever include this mixin once!
+@include mat-core();
+
+// Define the palettes for your theme using the Material Design palettes available in palette.scss
+// (imported above). For each palette, you can optionally specify a default, lighter, and darker
+// hue. Available color palettes: https://material.io/design/color/
+
+$custom-material-primary: (
+  50 : #fdf8ea,
+  100 : #f9edca,
+  200 : #f6e2a7,
+  300 : #f2d683,
+  400 : #efcd69,
+  500 : #ecc44e,
+  600 : #eabe47,
+  700 : #e7b63d,
+  800 : #e4af35,
+  900 : #dfa225,
+  A100 : #ffffff,
+  A200 : #fff6e6,
+  A400 : #ffe5b3,
+  A700 : #ffdc9a,
+  contrast: (
+    50 : #000000,
+    100 : #000000,
+    200 : #000000,
+    300 : #000000,
+    400 : #000000,
+    500 : #000000,
+    600 : #000000,
+    700 : #000000,
+    800 : #ffffff,
+    900 : #ffffff,
+    A100 : #000000,
+    A200 : #000000,
+    A400 : #000000,
+    A700 : #000000,
+  )
+);
+
+$custom-material-accent: (
+  50 : #fbf5e3,
+  100 : #f6e7b8,
+  200 : #f0d789,
+  300 : #eac659,
+  400 : #e6ba36,
+  500 : #e1ae12,
+  600 : #dda710,
+  700 : #d99d0d,
+  800 : #d5940a,
+  900 : #cd8405,
+  A100 : #fffbf6,
+  A200 : #ffe7c3,
+  A400 : #ffd290,
+  A700 : #ffc776,
+  contrast: (
+    50 : #000000,
+    100 : #000000,
+    200 : #000000,
+    300 : #000000,
+    400 : #000000,
+    500 : #000000,
+    600 : #000000,
+    700 : #000000,
+    800 : #000000,
+    900 : #000000,
+    A100 : #000000,
+    A200 : #000000,
+    A400 : #000000,
+    A700 : #000000,
+  )
+);
+
+
+$payment-widget-primary: mat-palette($custom-material-primary);
+$payment-widget-accent: mat-palette($custom-material-accent, A200, A100, A400);
+
+// The warn palette is optional (defaults to red).
+$payment-widget-warn: mat-palette($mat-red);
+
+// Create the theme object (a Sass map containing all of the palettes).
+$payment-widget-theme: mat-light-theme($payment-widget-primary, $payment-widget-accent, $payment-widget-warn);
+
+// Include theme styles for core and each component used in your app.
+// Alternatively, you can import and @include the theme mixins for each component
+// that you are using.
+@include angular-material-theme($payment-widget-theme);

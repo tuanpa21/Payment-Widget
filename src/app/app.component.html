@@ -81,7 +81,7 @@
 
             <mat-form-field class="col-sm-6">
               <mat-label>Expire Date</mat-label>
-              <input matInput formControlName="expire" mask="M0/00">
+              <input matInput formControlName="expire" mask="M0/00" [specialCharacters]="['/']" [dropSpecialCharacters]="false">
               <mat-hint>MM/YY</mat-hint>
               <mat-error *ngIf="cardForm.get('expire').errors && cardForm.get('expire').dirty && cardForm.get('expire').touched">
                 {{ cardForm.get('expire').value | validatorMesssage : cardForm.get('expire') }}

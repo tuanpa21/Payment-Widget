@@ -5,6 +5,7 @@ import {
   MatCardModule
 } from '@angular/material/card';
 import {MatDatepickerModule} from '@angular/material/datepicker';
+import {MatDialogModule} from '@angular/material/dialog';
 import {MatSelectModule} from '@angular/material/select';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
@@ -29,6 +30,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     NgxMaskModule.forRoot(),
     MatCardModule,
     FormsUtilModule,
+    MatButtonModule,
+    MatDialogModule
   ],
   providers: [],
   bootstrap: [AppComponent]

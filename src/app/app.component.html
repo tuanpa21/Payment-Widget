@@ -6,7 +6,7 @@
   />
 </div>
 
-<div class="content" role="main">
+<div class="content" role="main" [hidden]="openDialog">
 
   <mat-card>
     <mat-card-title class="text-primary text-uppercase">
@@ -19,11 +19,21 @@
           <mat-form-field class="col-sm-9 col-xs-8">
             <mat-label>Amount</mat-label>
             <input matInput formControlName="amount">
+            <mat-error *ngIf="paymentForm.get('amount').errors && paymentForm.get('amount').dirty && paymentForm.get('amount').touched">
+              {{ paymentForm.get('amount').value | validatorMesssage : paymentForm.get('amount') }}
+            </mat-error>
           </mat-form-field>
 
           <mat-form-field class="col-sm-3 col-xs-4">
             <mat-label>Currency</mat-label>
-            <input matInput formControlName="currency">
+            <mat-select formControlName="currency" name="currency">
+              <mat-option *ngFor="let currency of listCurrency" [value]="currency">
+                {{currency}}
+              </mat-option>
+            </mat-select>
+            <mat-error *ngIf="paymentForm.get('currency').errors && paymentForm.get('currency').dirty && paymentForm.get('currency').touched">
+              {{ paymentForm.get('currency').value | validatorMesssage : paymentForm.get('currency') }}
+            </mat-error>
           </mat-form-field>
         </div>
         <div class="row">
@@ -46,6 +56,9 @@
               <div style="clear:both;"></div>
               <span>{{method.name}}</span>
             </mat-radio-button>
+            <mat-error *ngIf="paymentForm.get('paymentMethod').errors && paymentForm.get('paymentMethod').dirty && paymentForm.get('paymentMethod').touched">
+              {{ paymentForm.get('paymentMethod').value | validatorMesssage : paymentForm.get('paymentMethod') }}
+            </mat-error>
           </mat-radio-group>
         </div>
         <ng-container formGroupName="cardForm">
@@ -53,21 +66,34 @@
             <mat-form-field class="col-sm-12">
               <mat-label>Name on card</mat-label>
               <input matInput formControlName="cardName">
+              <mat-error *ngIf="cardForm.get('cardName').errors && cardForm.get('cardName').dirty && cardForm.get('cardName').touched">
+                {{ cardForm.get('cardName').value | validatorMesssage : cardForm.get('cardName') }}
+              </mat-error>
             </mat-form-field>
 
             <mat-form-field class="col-sm-12">
               <mat-label>Card Number</mat-label>
               <input matInput formControlName="cardNumber">
+              <mat-error *ngIf="cardForm.get('cardNumber').errors && cardForm.get('cardNumber').dirty && cardForm.get('cardNumber').touched">
+                {{ cardForm.get('cardNumber').value | validatorMesssage : cardForm.get('cardNumber') }}
+              </mat-error>
             </mat-form-field>
 
             <mat-form-field class="col-sm-6">
               <mat-label>Expire Date</mat-label>
               <input matInput formControlName="expire">
+              <mat-hint>MM/YY</mat-hint>
+              <mat-error *ngIf="cardForm.get('expire').errors && cardForm.get('expire').dirty && cardForm.get('expire').touched">
+                {{ cardForm.get('expire').value | validatorMesssage : cardForm.get('expire') }}
+              </mat-error>
             </mat-form-field>
 
             <mat-form-field class="col-sm-6">
               <mat-label>CVV</mat-label>
               <input matInput formControlName="cvv">
+              <mat-error *ngIf="cardForm.get('cvv').errors && cardForm.get('cvv').dirty && cardForm.get('cvv').touched">
+                {{ cardForm.get('cvv').value | validatorMesssage : cardForm.get('cvv') }}
+              </mat-error>
             </mat-form-field>
           </div>
         </ng-container>

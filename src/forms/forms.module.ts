@@ -23,7 +23,6 @@ import {ValidatorMesssagePipe} from 'src/forms/validator-messsage.pipe';
     MatDatepickerModule,
     MatSelectModule,
     MatRadioModule,
-    MatButtonModule
   ]
 })
 export class FormsUtilModule { }

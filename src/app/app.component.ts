@@ -1,12 +1,14 @@
 import {Component, OnInit} from '@angular/core';
-import {FormBuilder, FormControl, FormGroup} from '@angular/forms';
+import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
+import {MatDialog} from '@angular/material/dialog';
 import {forkJoin} from 'rxjs';
 import {debounceTime, distinctUntilChanged} from 'rxjs/operators';
-import {PROJECT_KEY} from 'src/api/api-constant';
+import {CURRENCY, PROJECT_KEY} from 'src/api/api-constant';
 import {PaymentApiService} from 'src/api/payment-api.service';
 import {touchAllInput} from 'src/forms/reactive-form';
 import {ICountry} from 'src/model/country';
 import {IPaymentMethodRequest, IPaymentMethodResponse} from 'src/model/payment-method';
+import {PaymentResultComponent} from 'src/pages/payment-result/payment-result.component';
 
 @Component({
   selector: 'app-root',
@@ -17,13 +19,16 @@ export class AppComponent implements OnInit {
   listCountry: ICountry[] = [];
   tempCountry: ICountry[] = [];
   listPaymentMethods: IPaymentMethodResponse[] = [];
+  listCurrency: string[] = [...CURRENCY];
   paymentForm: FormGroup;
 
   filterCountry: FormControl = new FormControl();
+  openDialog = false;
 
   constructor(
     private paymentService: PaymentApiService,
-    private fb: FormBuilder
+    private fb: FormBuilder,
+    private dialog: MatDialog
   ) {
   }
 
@@ -36,15 +41,15 @@ export class AppComponent implements OnInit {
 
   initForm(): void {
     this.paymentForm = this.fb.group({
-      amount: [''],
-      currency: [''],
-      country: [''],
-      paymentMethod: [''],
+      amount: ['', Validators.required],
+      currency: ['', Validators.required],
+      country: ['', Validators.required],
+      paymentMethod: ['', Validators.required],
       cardForm: this.fb.group({
-        cardName: [''],
-        cardNumber: [''],
-        expire: [''],
-        cvv: ['']
+        cardName: ['', Validators.required],
+        cardNumber: ['', Validators.required],
+        expire: ['', Validators.required],
+        cvv: ['', Validators.required]
       })
     });
   }
@@ -62,6 +67,7 @@ export class AppComponent implements OnInit {
 
   getPaymentMethod(): void {
     this.paymentForm.get('country').valueChanges.pipe(distinctUntilChanged()).subscribe(country => {
+      this.paymentForm.get('paymentMethod').reset();
       const params: IPaymentMethodRequest = {
         country_code: country,
         key: PROJECT_KEY
@@ -91,10 +97,22 @@ export class AppComponent implements OnInit {
   }
 
   onSubmit() {
-    touchAllInput(this.paymentForm);
+    touchAllInput(this.paymentForm, true);
     if (this.paymentForm.invalid) {
       return;
     }
-    this.paymentForm.reset();
+    const dialogRef = this.dialog.open(PaymentResultComponent, {
+      width: '500px',
+      height: '175px'
+    });
+    this.openDialog = true;
+    dialogRef.afterClosed().subscribe(() => {
+      this.openDialog = false;
+      this.paymentForm.reset();
+    });
+  }
+
+  get cardForm(): FormGroup {
+    return this.paymentForm.get('cardForm') as FormGroup;
   }
 }

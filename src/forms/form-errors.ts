@@ -6,10 +6,9 @@ export const defaultErrors = {
   minlength: ({requiredLength, actualLength}) => `Expect ${requiredLength} but got ${actualLength}`,
   min: ({min}) => `Value must be greater than or equal to ${min}`,
   max: ({max}) => `Value must be less than or equal to ${max}`,
-  email: (error) => `LOGIN_FORM.EMAIL_VALIDATION`,
-  password: (error) => `Passwords do not match`,
   number: (error) => `Value must be numeric`,
-  integer: (error) => `Value must be an integer`
+  incorrectCardNumber: (error) => `Not a valid card number`,
+  incorrectExpDate: (error) => `Not a valid expiration date`
 };
 
 export const FORM_ERRORS = new InjectionToken('FORM_ERRORS', {

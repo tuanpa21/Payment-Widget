@@ -5,6 +5,7 @@ import {forkJoin} from 'rxjs';
 import {debounceTime, distinctUntilChanged} from 'rxjs/operators';
 import {CURRENCY, PROJECT_KEY} from 'src/api/api-constant';
 import {PaymentApiService} from 'src/api/payment-api.service';
+import {cardExpDateValidator, cardNumberValidator} from 'src/forms/custom-validation';
 import {touchAllInput} from 'src/forms/reactive-form';
 import {ICountry} from 'src/model/country';
 import {IPaymentMethodRequest, IPaymentMethodResponse} from 'src/model/payment-method';
@@ -47,8 +48,8 @@ export class AppComponent implements OnInit {
       paymentMethod: ['', Validators.required],
       cardForm: this.fb.group({
         cardName: ['', Validators.required],
-        cardNumber: ['', Validators.required],
-        expire: ['', Validators.required],
+        cardNumber: ['', [Validators.required, cardNumberValidator]],
+        expire: ['', [Validators.required, cardExpDateValidator]],
         cvv: ['', Validators.required]
       })
     });

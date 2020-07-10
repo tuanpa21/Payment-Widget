@@ -22,7 +22,6 @@ export class ValidatorMesssagePipe implements PipeTransform {
     if (!customError) {
       customError = {};
     }
-
     const errors = control.errors;
     const firstKey = Object.keys(errors)[0];
     const getError = this.errors[firstKey];

@@ -18,7 +18,7 @@
         <div class="row">
           <mat-form-field class="col-sm-9 col-xs-8">
             <mat-label>Amount</mat-label>
-            <input matInput formControlName="amount">
+            <input matInput formControlName="amount" mask="separator.2" thousandSeparator=",">
             <mat-error *ngIf="paymentForm.get('amount').errors && paymentForm.get('amount').dirty && paymentForm.get('amount').touched">
               {{ paymentForm.get('amount').value | validatorMesssage : paymentForm.get('amount') }}
             </mat-error>
@@ -65,7 +65,7 @@
           <div class="row">
             <mat-form-field class="col-sm-12">
               <mat-label>Name on card</mat-label>
-              <input matInput formControlName="cardName">
+              <input matInput formControlName="cardName" mask="S* S*">
               <mat-error *ngIf="cardForm.get('cardName').errors && cardForm.get('cardName').dirty && cardForm.get('cardName').touched">
                 {{ cardForm.get('cardName').value | validatorMesssage : cardForm.get('cardName') }}
               </mat-error>
@@ -73,7 +73,7 @@
 
             <mat-form-field class="col-sm-12">
               <mat-label>Card Number</mat-label>
-              <input matInput formControlName="cardNumber">
+              <input matInput formControlName="cardNumber" mask="0000 0000 0000 0000">
               <mat-error *ngIf="cardForm.get('cardNumber').errors && cardForm.get('cardNumber').dirty && cardForm.get('cardNumber').touched">
                 {{ cardForm.get('cardNumber').value | validatorMesssage : cardForm.get('cardNumber') }}
               </mat-error>
@@ -81,7 +81,7 @@
 
             <mat-form-field class="col-sm-6">
               <mat-label>Expire Date</mat-label>
-              <input matInput formControlName="expire">
+              <input matInput formControlName="expire" mask="M0/00">
               <mat-hint>MM/YY</mat-hint>
               <mat-error *ngIf="cardForm.get('expire').errors && cardForm.get('expire').dirty && cardForm.get('expire').touched">
                 {{ cardForm.get('expire').value | validatorMesssage : cardForm.get('expire') }}
@@ -90,7 +90,7 @@
 
             <mat-form-field class="col-sm-6">
               <mat-label>CVV</mat-label>
-              <input matInput formControlName="cvv">
+              <input matInput formControlName="cvv" mask="000">
               <mat-error *ngIf="cardForm.get('cvv').errors && cardForm.get('cvv').dirty && cardForm.get('cvv').touched">
                 {{ cardForm.get('cvv').value | validatorMesssage : cardForm.get('cvv') }}
               </mat-error>
@@ -102,7 +102,7 @@
 
     <mat-card-actions>
       <button mat-raised-button color="primary" (click)="onSubmit()">
-        <i class="material-icons mr-2">payment</i> Pay {{paymentForm.get('amount').value}} {{paymentForm.get('currency').value}}
+        <i class="material-icons mr-2">payment</i> Pay {{paymentForm.get('amount').value | mask: 'separator.2' :','}} {{paymentForm.get('currency').value}}
       </button>
     </mat-card-actions>
   </mat-card>
